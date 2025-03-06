@@ -74,12 +74,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             count++;
             for (int col = 0; col < board[row].length; col++) {
                 if (count % 2 == 0) {
-                    board[row][col] = new Square(this, true, row, col);
+                    board[row][col] = new Square(this, false, row, col);
                     this.add(board[row][col]);
                     count++;
                 }
                 else if (count % 2 != 0) {
-                    board[row][col] = new Square(this, false, row, col);
+                    board[row][col] = new Square(this, true, row, col);
                     this.add(board[row][col]);
                     count++;
                 }
@@ -104,23 +104,41 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     private void initializePieces() {
     	
-    	board[3][3].put(new Piece(true, RESOURCES_WROCKET_PNG));
-        board[4][3].put(new Piece(false, RESOURCES_BROCKET_PNG));
-        board[4][3].put(new Piece(false, RESOURCES_BROCKET_PNG));
-        board[4][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[2][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[3][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
+    	board[0][0].put(new Piece(false, RESOURCES_BROCKET_PNG));
+        board[0][1].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+        board[0][2].put(new Piece(false, RESOURCES_BBISHOP_PNG));
+        board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
+        board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
+        board[0][5].put(new Piece(false, RESOURCES_BBISHOP_PNG));
+        board[0][6].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
+        board[0][7].put(new Piece(false, RESOURCES_BROCKET_PNG));
 
-        board[0][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[7][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[0][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[7][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[3][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[3][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[0][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[7][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[5][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[3][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[1][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][1].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][2].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][5].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][6].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        
+        board[7][0].put(new Piece(true, RESOURCES_WROCKET_PNG));
+        board[7][1].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
+        board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
+        board[7][3].put(new Piece(true, RESOURCES_WQUEEN_PNG));
+        board[7][4].put(new Piece(true, RESOURCES_WKING_PNG));
+        board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
+        board[7][6].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
+        board[7][7].put(new Piece(true, RESOURCES_WROCKET_PNG));
+
+        board[6][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
     }
 
     public Square[][] getSquareArray() {
