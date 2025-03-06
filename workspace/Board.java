@@ -107,7 +107,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     	board[3][3].put(new Piece(true, RESOURCES_WROCKET_PNG));
         board[4][3].put(new Piece(false, RESOURCES_BROCKET_PNG));
         board[4][3].put(new Piece(false, RESOURCES_BROCKET_PNG));
-        board[4][4].put(new Piece(false, RESOURCES_BPAWN_PNG));aasd
+        board[4][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
         board[2][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
         board[3][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
 
@@ -115,10 +115,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         board[7][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
         board[0][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
         board[7][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[3][0].put(new Piece(false, RESOURCES_WPAWN_PNG));
+        board[3][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
         board[3][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
         board[0][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[7][3].put(new Piece(false, RESOURCES_WPAWN_PNG));
+        board[7][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
         board[5][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
         board[3][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
     }
@@ -245,13 +245,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         currX = e.getX() - 24;
         currY = e.getY() - 24;
 
-        /*if (currPiece != null) {
+        if (currPiece != null) {
             for (Square s: currPiece.getLegalMoves(this, fromMoveSquare)) {
                 s.setBorder(BorderFactory.createLineBorder(Color.red));
             }
         }
 
-        repaint();*/
+        repaint();
 
         //testing for getControlledSquares
         /*if (currPiece != null) {

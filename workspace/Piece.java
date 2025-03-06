@@ -134,56 +134,75 @@ public class Piece {
 
     //the piece is a rook with a bomb (rook rocket), it moves like a normal rook but has a 15% chance of exploding and 
     //destroying itself and the 8 pieces around it
-    public ArrayList<Square> getLegalMoves(Board b, Square start){
-      ArrayList<Square> moves = new ArrayList<Square>();
-      
-      for (int i = 1; i < 8; i++){
+    public ArrayList<Square> getLegalMoves(Board b, Square start) {
+    ArrayList<Square> moves = new ArrayList<Square>();
+
+    for (int i = 1; i < 8; i++) {
         if (start.getCol() + i < 8) {
-          Square currSquare = b.getSquareArray()[start.getRow()][start.getCol()+i];
-          if (currSquare.getOccupyingPiece() != null && start.getOccupyingPiece().getColor() == currSquare.getOccupyingPiece().getColor()) {
-            continue;
-          }
-          else {
+            Square currSquare = b.getSquareArray()[start.getRow()][start.getCol() + i];
+            if (currSquare.getOccupyingPiece() != null) {
+                if (start.getOccupyingPiece().getColor() != currSquare.getOccupyingPiece().getColor()) {
+                    moves.add(currSquare); 
+                }
+                break; 
+            }
             moves.add(currSquare);
-          }
+        } 
+        else {
+          break;
         }
-      }
-    
-      for (int i = 8; i > 0; i--){
-        if (start.getCol() - i >= 0) {
-          Square currSquare = b.getSquareArray()[start.getRow()][start.getCol()-i];
-          if (currSquare.getOccupyingPiece() != null && start.getOccupyingPiece().getColor() == currSquare.getOccupyingPiece().getColor()) {
-            continue;
-          }
-          else {
-            moves.add(currSquare);
-        }
-      }
-      }
-      for (int i = 1; i < 8; i++){
-        if (start.getRow() + i < 8) {
-          Square currSquare = b.getSquareArray()[start.getRow()+i][start.getCol()];
-          if (currSquare.getOccupyingPiece() != null && start.getOccupyingPiece().getColor() == currSquare.getOccupyingPiece().getColor()) {
-            continue;
-          }
-          else {
-            moves.add(currSquare);
-        }
-      }
-      }
-      for (int i = 8; i > 0; i--){
-        if (start.getRow() - i >= 0) {
-          Square currSquare = b.getSquareArray()[start.getRow()-i][start.getCol()];
-          if (currSquare.getOccupyingPiece() != null && start.getOccupyingPiece().getColor() == currSquare.getOccupyingPiece().getColor()) {
-            continue;
-          }
-          else {
-            moves.add(currSquare);
-        }
-      }
-      
-      }  
-    	return moves;
-    
     }
+
+    for (int i = 1; i < 8; i++) {
+        if (start.getCol() - i >= 0) {
+            Square currSquare = b.getSquareArray()[start.getRow()][start.getCol() - i];
+            if (currSquare.getOccupyingPiece() != null) {
+                if (start.getOccupyingPiece().getColor() != currSquare.getOccupyingPiece().getColor()) {
+                    moves.add(currSquare);
+                }
+                break;
+            }
+            moves.add(currSquare);
+        } 
+        else {
+          break;
+        }
+    }
+
+    // Moving down
+    for (int i = 1; i < 8; i++) {
+        if (start.getRow() + i < 8) {
+            Square currSquare = b.getSquareArray()[start.getRow() + i][start.getCol()];
+            if (currSquare.getOccupyingPiece() != null) {
+                if (start.getOccupyingPiece().getColor() != currSquare.getOccupyingPiece().getColor()) {
+                    moves.add(currSquare);
+                }
+                break;
+            }
+            moves.add(currSquare);
+        } 
+        else {
+          break;
+        }
+    }
+
+    for (int i = 1; i < 8; i++) {
+        if (start.getRow() - i >= 0) {
+            Square currSquare = b.getSquareArray()[start.getRow() - i][start.getCol()];
+            if (currSquare.getOccupyingPiece() != null) {
+                if (start.getOccupyingPiece().getColor() != currSquare.getOccupyingPiece().getColor()) {
+                    moves.add(currSquare);
+                }
+                break;
+            }
+            moves.add(currSquare);
+        } 
+        else {
+          break;
+        }
+    }
+
+    return moves;
+}
+
 }
