@@ -98,47 +98,77 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 
     }
 
+    //precondition - the board is initialized and contains a king of either color. The boolean kingColor corresponds to the color of the king we wish to know the status of.
+    //postcondition - returns true of the king is in check and false otherwise.
+    //isInCheck
+	public boolean isInCheck(boolean kingColor){
+        //i'm pretty confident this is all right and i still can't figure out why it doesn't work
+        for (int row = 0; row <= 7; row++) {
+            for (int col = 0; col <= 7; col++) {
+                Square thisSquare = board[row][col];
+                if (thisSquare.getOccupyingPiece() != null && thisSquare.getOccupyingPiece().getColor() != kingColor) {
+                    for (Square s : thisSquare.getOccupyingPiece().getControlledSquares(board, thisSquare)) {
+                        if (s.getOccupyingPiece() != null && thisSquare.getOccupyingPiece() instanceof King && thisSquare.getOccupyingPiece().getColor() == kingColor) {  
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
     
 	//set up the board such that the black pieces are on one side and the white pieces are on the other.
 	//since we only have one kind of piece for now you need only set the same number of pieces on either side.
 	//it's up to you how you wish to arrange your pieces.
     private void initializePieces() {
-    	
-    	board[0][0].put(new Piece(false, RESOURCES_BROCKET_PNG));
-        board[0][1].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
-        board[0][2].put(new Piece(false, RESOURCES_BBISHOP_PNG));
-        board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
-        board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
-        board[0][5].put(new Piece(false, RESOURCES_BBISHOP_PNG));
-        board[0][6].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
-        board[0][7].put(new Piece(false, RESOURCES_BROCKET_PNG));
-
-        board[1][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][1].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][2].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][5].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][6].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        /*
+        board[3][3].put(new RookRocket(true, RESOURCES_WROCKET_PNG));
+        board[3][5].put(new King(false, RESOURCES_BPAWN_PNG));
+        board[5][3].put(new RookRocket(true, RESOURCES_WROCKET_PNG));
+        board[5][5].put(new King(true, RESOURCES_WKING_PNG));
+        board[5][5].put(new King(false, RESOURCES_BKING_PNG));
+        */
         
-        board[7][0].put(new Piece(true, RESOURCES_WROCKET_PNG));
-        board[7][1].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
-        board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
-        board[7][3].put(new Piece(true, RESOURCES_WQUEEN_PNG));
-        board[7][4].put(new Piece(true, RESOURCES_WKING_PNG));
-        board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
-        board[7][6].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
-        board[7][7].put(new Piece(true, RESOURCES_WROCKET_PNG));
+        //System.out.println(board[3][3].getOccupyingPiece());
 
-        board[6][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
+    	
+    	board[0][0].put(new RookRocket(false, RESOURCES_BROCKET_PNG));
+        board[0][1].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
+        board[0][2].put(new Bishop(false, RESOURCES_BBISHOP_PNG));
+        board[0][3].put(new Queen(false, RESOURCES_BQUEEN_PNG));
+        board[0][4].put(new King(false, RESOURCES_BKING_PNG));
+        board[0][5].put(new Bishop(false, RESOURCES_BBISHOP_PNG));
+        board[0][6].put(new Knight(false, RESOURCES_BKNIGHT_PNG));
+        board[0][7].put(new Rook(false, RESOURCES_BROOK_PNG));
+
+        board[1][0].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][1].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][2].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][3].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][4].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][5].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][6].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        board[1][7].put(new Pawn(false, RESOURCES_BPAWN_PNG));
+        
+        board[7][0].put(new RookRocket(true, RESOURCES_WROCKET_PNG));
+        board[7][1].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
+        board[7][2].put(new Bishop(true, RESOURCES_WBISHOP_PNG));
+        board[7][3].put(new Queen(true, RESOURCES_WQUEEN_PNG));
+        board[7][4].put(new King(true, RESOURCES_WKING_PNG));
+        board[7][5].put(new Bishop(true, RESOURCES_WBISHOP_PNG));
+        board[7][6].put(new Knight(true, RESOURCES_WKNIGHT_PNG));
+        board[7][7].put(new Rook(true, RESOURCES_WROOK_PNG));
+
+        board[6][0].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][1].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][2].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][3].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][4].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][5].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][6].put(new Pawn(true, RESOURCES_WPAWN_PNG));
+        board[6][7].put(new Pawn(true, RESOURCES_WPAWN_PNG));
     }
 
     public Square[][] getSquareArray() {
@@ -204,46 +234,62 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //moving the new piece to it's new board location. 
     @Override
     public void mouseReleased(MouseEvent e) {
-        Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
-        
-        if (currPiece != null) {
-        if (currPiece.getColor() == whiteTurn) {
-            ArrayList<Square> legalMoves = currPiece.getLegalMoves(this, fromMoveSquare);
-            for (Square move : legalMoves) {
+        //  WHY IS ISINCHECK NOT WORKING
+        if (currPiece != null && currPiece.getColor() == whiteTurn) {
+            Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
+            Piece endPiece = endSquare.getOccupyingPiece();
+            //ArrayList<Square> legalMoves = currPiece.getLegalMoves(this, fromMoveSquare);
+            for (Square move : currPiece.getLegalMoves(this, fromMoveSquare)) {
                 if (endSquare == move){
-                    endSquare.put(fromMoveSquare.getOccupyingPiece());
-                    fromMoveSquare.put(null); 
-                    if (Math.random() < .2) {
-                        if (endSquare.getRow() - 1 >= 0) {
-                            board[endSquare.getRow()-1][endSquare.getCol()].put(null);
+                    /*if (currPiece instanceof RookRocket){
+                        endSquare.put(fromMoveSquare.getOccupyingPiece());
+                        fromMoveSquare.put(null); 
+                        if (Math.random() < .2) {
+                            if (endSquare.getRow() - 1 >= 0) {
+                                board[endSquare.getRow()-1][endSquare.getCol()].put(null);
+                            }
+                            if (endSquare.getRow() + 1 <= 7) {
+                                board[endSquare.getRow()+1][endSquare.getCol()].put(null);
+                            }
+                            if (endSquare.getCol() - 1 >= 0) {
+                                board[endSquare.getRow()][endSquare.getCol()-1].put(null);
+                            }    
+                            if (endSquare.getCol() + 1 <= 7) {
+                                board[endSquare.getRow()][endSquare.getCol()+1].put(null);
+                            }
+                            if (endSquare.getRow() - 1 >= 0 && endSquare.getCol() - 1 >= 0) {
+                                board[endSquare.getRow()-1][endSquare.getCol()-1].put(null);
+                            }
+                            if (endSquare.getRow() - 1 >= 0 && endSquare.getCol() + 1 <= 7) {
+                                board[endSquare.getRow()-1][endSquare.getCol()+1].put(null);
+                            }
+                            if (endSquare.getRow() + 1 <= 7 && endSquare.getCol() - 1 >= 0) {
+                                board[endSquare.getRow()+1][endSquare.getCol()-1].put(null);
+                            }
+                            if (endSquare.getRow() + 1 <= 7 && endSquare.getCol() + 1 <= 7) {
+                                board[endSquare.getRow()+1][endSquare.getCol()+1].put(null);
+                            }
+                            endSquare.put(null);
                         }
-                        if (endSquare.getRow() + 1 <= 7) {
-                            board[endSquare.getRow()+1][endSquare.getCol()].put(null);
-                        }
-                        if (endSquare.getCol() - 1 >= 0) {
-                            board[endSquare.getRow()][endSquare.getCol()-1].put(null);
-                        }    
-                        if (endSquare.getCol() + 1 <= 7) {
-                            board[endSquare.getRow()][endSquare.getCol()+1].put(null);
-                        }
-                        if (endSquare.getRow() - 1 >= 0 && endSquare.getCol() - 1 >= 0) {
-                            board[endSquare.getRow()-1][endSquare.getCol()-1].put(null);
-                        }
-                        if (endSquare.getRow() - 1 >= 0 && endSquare.getCol() + 1 <= 7) {
-                            board[endSquare.getRow()-1][endSquare.getCol()+1].put(null);
-                        }
-                        if (endSquare.getRow() + 1 <= 7 && endSquare.getCol() - 1 >= 0) {
-                            board[endSquare.getRow()+1][endSquare.getCol()-1].put(null);
-                        }
-                        if (endSquare.getRow() + 1 <= 7 && endSquare.getCol() + 1 <= 7) {
-                            board[endSquare.getRow()+1][endSquare.getCol()+1].put(null);
-                        }
-                        board[endSquare.getRow()][endSquare.getCol()].put(null);
+                    }
+                    else {
+                        endSquare.put(fromMoveSquare.getOccupyingPiece());
+                        fromMoveSquare.put(null);
+                    }
+                    */
+                    // no matter how many times i go over and redo this part i cant figure out why it doesn't work
+                    endSquare.put(currPiece);
+                    fromMoveSquare.put(null);
+                    if (isInCheck(whiteTurn)) {
+                        endSquare.put(endPiece);
+                        fromMoveSquare.put(currPiece);
+                        break;
                     }
                     whiteTurn = !whiteTurn;
-                }
-                
+                    break;
+                }  
             }
+
         for (Square[] row: board) {
             for (Square s: row) {
                 s.setBorder(null);
@@ -251,12 +297,10 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         }
         fromMoveSquare.setDisplay(true);
         currPiece = null;
-        repaint();
-        
+        repaint();  
     }
     }
-        
-    }
+    
 
     @Override
     public void mouseDragged(MouseEvent e) {
