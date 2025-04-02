@@ -108,7 +108,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                 Square thisSquare = board[row][col];
                 if (thisSquare.getOccupyingPiece() != null && thisSquare.getOccupyingPiece().getColor() != kingColor) {
                     for (Square s : thisSquare.getOccupyingPiece().getControlledSquares(board, thisSquare)) {
-                        if (s.getOccupyingPiece() != null && thisSquare.getOccupyingPiece() instanceof King && thisSquare.getOccupyingPiece().getColor() == kingColor) {  
+                        if (s.getOccupyingPiece() != null && s.getOccupyingPiece() instanceof King && s.getOccupyingPiece().getColor() == kingColor) {  
                             return true;
                         }
                     }
