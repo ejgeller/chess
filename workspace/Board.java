@@ -102,7 +102,6 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //postcondition - returns true of the king is in check and false otherwise.
     //isInCheck
 	public boolean isInCheck(boolean kingColor){
-        //i'm pretty confident this is all right and i still can't figure out why it doesn't work
         for (int row = 0; row <= 7; row++) {
             for (int col = 0; col <= 7; col++) {
                 Square thisSquare = board[row][col];
@@ -234,14 +233,13 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     //moving the new piece to it's new board location. 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //  WHY IS ISINCHECK NOT WORKING
         if (currPiece != null && currPiece.getColor() == whiteTurn) {
             Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
             Piece endPiece = endSquare.getOccupyingPiece();
             //ArrayList<Square> legalMoves = currPiece.getLegalMoves(this, fromMoveSquare);
             for (Square move : currPiece.getLegalMoves(this, fromMoveSquare)) {
                 if (endSquare == move){
-                    /*if (currPiece instanceof RookRocket){
+                    if (currPiece instanceof RookRocket){
                         endSquare.put(fromMoveSquare.getOccupyingPiece());
                         fromMoveSquare.put(null); 
                         if (Math.random() < .2) {
@@ -276,10 +274,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
                         endSquare.put(fromMoveSquare.getOccupyingPiece());
                         fromMoveSquare.put(null);
                     }
-                    */
-                    // no matter how many times i go over and redo this part i cant figure out why it doesn't work
-                    endSquare.put(currPiece);
-                    fromMoveSquare.put(null);
+                    //endSquare.put(currPiece);
+                    //fromMoveSquare.put(null);
                     if (isInCheck(whiteTurn)) {
                         endSquare.put(endPiece);
                         fromMoveSquare.put(currPiece);
